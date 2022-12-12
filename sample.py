@@ -379,6 +379,221 @@
 
 ###################################################################################################
 
+# import collections
+
+# Node = collections.namedtuple('Node', ['left', 'right', 'value'])
+
+
+# def contains(root, value):
+#     if root is None:
+#         return False
+#     elif root.value == value:
+#         return True
+#     elif root.value >= value:
+#         return contains(root.left, value)
+#     else:
+#         return contains(root.right, value)
+
+
+# n1 = Node(value=1, left=None, right=None)
+# n3 = Node(value=3, left=None, right=None)
+# n2 = Node(value=2, left=n1, right=n3)
+
+# print(contains(n2, 3))
+
+#######################################################################################
+
+# class TextInput:
+#     def __init__(self) :
+#        self.value = ""
+#     def  set_value(self,value):
+#         self.value = value
+
+#     def add(self,character):
+#         self.set_value(self.get_value()+character)
+        
+#     def  get_value(self):
+#         return self.value
+  
+# class NumericInput(TextInput) :
+#     def add(self,character):
+#         try:
+#             num  = int(character)
+#             self.set_value(self.get_value()+str(num))
+#         except:
+#             pass
+#         return self.get_value()
+
+# if __name__ == '__main__':
+#     input = NumericInput()
+#     input.add("1")
+#     input.add("a")
+#     input.add("0")
+#     print(input.get_value())
+
+#######################################################################################
+
+# class Song:
+#     def __init__(self, name):
+#         self.name = name
+#         self.next = None
+
+#     def next_song(self, song):
+#         self.next = song 
+    
+#     def is_in_repeating_playlist(self):
+#         """
+#         :returns: (bool) True if the playlist is repeating, False if not.
+#         """
+#         if self.next is None:
+#             return False
+#         song_list = set()
+#         current = self
+        
+#         while True:
+#             if current.next is None:
+#                 return False
+#             elif current.next.name not in song_list:
+#                 song_list.add(current.name)
+#                 current = current.next
+#             else:
+#                 return True    
+
+# first = Song("Hello")
+# second = Song("Eye of the tiger")
+    
+# first.next_song(second)
+# second.next_song(first)
+    
+# print(first.is_in_repeating_playlist())
+
+#######################################################################################
+
+# class DocumentStore(object):
+
+#     def __init__(self, capacity):
+#         self._capacity = capacity
+#         self._documents = []
+
+#     @property
+#     def capacity(self):
+#         return self._capacity
+
+#     @property
+#     def documents(self):
+#         return self._documents
+
+#     def add_document(self, document):
+#         if len(self._documents) >= self._capacity:
+#             raise Exception('Document store is full')
+#         self._documents.append(document)
+
+#     def __repr__(self):
+#         return "Document store: " + str(len(self._documents)) + "/" + str(self._capacity)
+
+
+# # To see the output, uncomment the lines belows:
+# document_store = DocumentStore(2)
+# document_store.add_document("document")
+# print(document_store)
+
+########################################################################################
+
+# def minimal_number_of_packages(items, available_large_packages, available_small_packages):
+#     if(items>available_large_packages*5+available_small_packages):
+#         return -1
+#     possible_large = (int(items/5))
+#     if(available_large_packages>=possible_large):
+#         count = possible_large
+#         possible_small = items - 5*count 
+#         count += possible_small
+#     else:
+#         count = available_large_packages
+#         possible_small = items - 5*count
+#         count+=possible_small
+
+#     return count
+    
+# print(minimal_number_of_packages(16, 2, 10))
+
+########################################################################################
+
+# class Greeter:
+
+#     def __init__(self, boss):
+#         self.boss = boss
+#         self.latest_entry = None
+#         self.status = False
+
+#     def enters(self, visitor):   
+#         self.status = True
+#         self.latest_entry = visitor
+
+#         return None
+
+#     def greet(self):
+#         if self.status == True:
+#             if self.latest_entry == self.boss :
+#                 self.status = False
+#                 return "Hello, %s" %self.latest_entry
+#             else:
+#                 self.status = False
+#                 return "Welcome, %s" %self.latest_entry
+#         else:
+#             return None
+    
+# if __name__ == "__main__":
+#     g = Greeter('Chuck')
+#     g.enters('John')
+#     print(g.greet())
+
+########################################################################################
+
+# from collections import namedtuple
+# from functools import reduce
+# from itertools import chain
+# from operator import add
+
+# def merge(*records):
+#     """
+#     :param records: (varargs list of namedtuple) The patient details.
+#     :returns: (namedtuple) named Patient, containing details from all records, in entry order.
+#     """ 
+#     cls = namedtuple("Patient", reduce(add, (arg._fields for arg in records)))
+#     #cls = namedtuple("_".join(arg.__class__.__name__ for arg in records), reduce(add, (arg._fields for arg in records)))
+
+#     return cls(*chain(*records))
+#     # return None
+    
+# PersonalDetails = namedtuple('PersonalDetails', ['date_of_birth'])
+# personal_details = PersonalDetails(date_of_birth = '06-04-1972')
+                                   
+# Complexion = namedtuple('Complexion', ['eye_color', 'hair_color'])
+# complexion = Complexion(eye_color = 'Blue', hair_color = 'Black')
+  
+# print(merge(personal_details, complexion))
+
+########################################################################################
+
+# def find_all_hobbyists(hobby, hobbies):
+#     final_list = []
+#     for person in hobbies:
+#         if hobby in hobbies[person]:
+#             final_list.append(person)
+#     return final_list 
+
+# if __name__ == "__main__":
+#     hobbies = { 
+#         "Steve": ['Fashion', 'Piano', 'Reading'],
+#         "Patty": ['Drama', 'Magic', 'Pets'],
+#         "Chad": ['Puzzles', 'Pets', 'Yoga']
+#     }
+    
+#     print(find_all_hobbyists('Yoga', hobbies))
+
+########################################################################################
+
+
 import random
 
 def init(n):
