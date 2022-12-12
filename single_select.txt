@@ -1,0 +1,33 @@
+MCQ-1
+
+A data analytics company needs to extract distinct authors from clients' book data. 
+The following function gets distinct authors from the books list, which is a list of Book objects:
+
+class Book:
+    def __init__(self, book_name, author):
+        self.book_name = book_name
+        self.author = author
+
+def distinct_authors(books):
+    authors = []
+    for book in books:
+        author_to_add = book.author
+        if author_to_add not in authors:
+            authors.append(author_to_add)
+    return authors
+
+However, when used with a large data set, the distinct_authors function takes a long time to return all authors. 
+How can the function performance be significantly improved?
+
+1. The authors should be declared as a set and authors.append changed to authors.add.
+2. Replace the if statement with the "if authors.index(author_to_add) != -1". 
+3. Import the array module and declare authors as an array.
+4. Remove the return statement and add "yield author_to_add" after adding to the authors list.
+5. Replace "authors.append(author_to_add)" with "authors + [author_to_add]".
+6. Replace the for loop with a list comprehension.
+
+########################
+Answer : 1
+########################
+
+#############################################################################################################################

@@ -1,0 +1,290 @@
+MCQ-1
+
+A university's Office of Admission keeps track of student majors. 
+Each student can have a single major. 
+Below is an example of how their system stores students, majors, and how it manipulates them:
+
+students = [("Allen Anderson", "Computer Science"),
+            ("Edgar Einstein", "Engineering"),
+            ("Farrah Finn", "Fine Arts")]
+     
+def add_new_student(students, name, major):
+    students.append((name, major))
+
+def update_student(students, index, name, major):
+    students[index] = (name, major)
+
+def find_students_by_name(students, name):
+    return [student for student in students if name in student[0]]
+
+def get_all_majors(students):
+    return [student[1] for student in students]
+
+What can be concluded from the code snippet above?
+(Select all acceptable answers.)
+1. In the update_student function, the '(' and ')' parentheses can be removed without causing any errors.
+2. Calling find_students_by_name(students, 'in') returns a list of 2 tuples.
+3. The add_new_student function can be rewritten as seen below and still maintain identical functionality:
+students[len(students)] = (name, major)
+4. Calling get_all_majors(students) returns a list of 3 tuples.
+5. The add_new_student function adds a new student in the last place in the list.
+6. The name of the first student in the array can be set to the new_name variable, like students[0][0] = new_name
+
+########################
+Answers : 1, 2, 5
+########################
+
+#############################################################################################################################
+
+MCQ-2
+
+Consider the following code snippet:
+
+def read_first_line(path):
+    file = None
+    first_line = None
+    try:
+        file = open(path)
+        first_line = file.readline()
+    except FileNotFoundError as e:
+        print('Error reading from "' + path + '". Message = "' + e.strerror + '"')
+    finally:
+        if file is not None:
+            try:
+                file.close()
+            except:
+                pass
+    return first_line
+
+Select the statements that are correct if the open() function throws a FileNotFoundError exception.
+
+
+(Select all acceptable answers.)
+1. The result of file.readline() will be assigned to the variable first_line.
+2. An error message will be printed to the console.
+3. The file variable will be compared to None.
+4. The file.close() function will be called.
+5. The function will return None.
+
+########################
+Answers : 2, 3, 5
+########################
+
+
+#############################################################################################################################
+
+MCQ-3
+
+A forum for hobbies uses the following function to count how many hobbies a user has that match a certain word:
+
+def count_hobby_words(hobbies, word):
+    counter = 0
+    for hobby in hobbies:
+        if word in hobby.split():
+            counter += 1
+    return counter
+What result will you get if you call count_hobby_words with various parameters?
+
+(Select all acceptable answers.)
+1. Calling count_hobby_words(["Tennis", "Table Tennis"], "Tennis") will return 2.
+2. Calling count_hobby_words(["Tennis", "Table Tennis"], "Table") will return 0.
+3. Calling count_hobby_words(["Tennis", "Table Tennis"], "Tab") will return 0.
+4. Calling count_hobby_words(["Tennis", "Table Tennis"], "tennis") will return 2.
+
+########################
+Answers : 1, 3
+########################
+
+#############################################################################################################################
+
+MCQ-4
+
+An intern was working on a utility function that his team will use for changing file formats in batch. 
+The idea is to encapsulate the multiprocessing needs of the application in a separate function as seen below:
+
+
+import multiprocessing
+
+def change_file_format(filenames):
+    processes = []
+    for filename in filenames:
+        processes.append(multiprocessing.Process(target = convert, args=filename))
+        processes[-1].start()
+        
+    failed_conversions = []
+    for process, function in zip(processes, filenames):
+        process.join()
+
+        if process.exitcode != 0:
+            failed_conversions.append(function)
+
+    return failed_conversions
+
+What can be concluded about the change_file_format function?
+(Select all acceptable answers.)
+
+1. The function change_file_format will start a process that will invoke the convert function without any arguments.
+2. If change_file_format is called with multiple filenames, they will be converted in parallel.
+3. The convert function should change the process return code to something that is not zero if the conversion fails.
+4. The change_file_format function can start at most one process. 
+5. The change_file_format function will return as soon as the first process has finished the conversion.
+6. The change_file_format function will pass a filename as the first argument to the convert function.
+
+########################
+Answers : 2, 3, 6
+########################
+
+#############################################################################################################################
+
+MCQ-5
+
+Consider the following Python code:
+
+class MilesToKmConverter:
+    def get_miles_to_km_factor(self):
+        return 1.609
+
+    def miles_to_km(self, miles):
+        return self.get_miles_to_km_factor() * miles
+
+class NauticalMilesToKmConverter(MilesToKmConverter):
+    def get_miles_to_km_factor(self):
+        return 1.852
+    
+    def printFactors(self):
+    	print(self.get_miles_to_km_factor(), super().get_miles_to_km_factor())
+
+Select all the correct answers.
+(Select all acceptable answers.)
+
+1. NauticalMilesToKmConverter().miles_to_km(1)
+   will return 1.852.
+2. MilesToKmConverter().printFactors()
+   will print: 1.852 1.609
+3. MilesToKmConverter().miles_to_km(1)
+   will return 1.609.
+4. NauticalMilesToKmConverter().printFactors()
+   will print: 1.852 1.852
+
+########################
+Answers : 1, 3
+########################
+
+#############################################################################################################################
+
+MCQ - 6
+
+Select all the code snippets that could be used to generate a list of alphabetic characters from a given string.
+For example, 'Hello, World!' would generate:
+
+['H', 'e', 'l', 'l', 'o', 'W', 'o', 'r', 'l', 'd']
+
+
+(Select all acceptable answers.)
+
+1. return (chr for chr in input if chr.isalpha())
+2. return [chr for chr in input if chr.isalpha()]
+
+3.
+    lst = []
+    for chr in input:
+        if chr.isalpha():
+            lst.append(chr)
+    return lst
+4.
+    lst = []
+    list.append(chr for chr in input if chr.isalpha())
+    return lst
+
+########################
+Answers : 2, 3
+########################
+
+#############################################################################################################################
+
+MCQ -7
+
+A text editor is using the following class to keep track of action order to implement the undo functionality:
+
+
+from collections import deque
+
+class ActionStack():
+    def __init__(self):
+        self.stack = deque()
+
+    def perform_action(self, action):
+        if action is not None:
+            self.stack.append(action)
+
+    def undo_action(self):
+        if len(self.stack) == 0:
+            raise Exception("No more actions!")
+        return self.stack.pop()
+The class can be used like the following:
+
+text_actions = ActionStack()
+text_actions.perform_action("Write text")
+text_actions.perform_action("Add an empty page")
+text_actions.perform_action("Change the font color")
+last_action = text_actions.undo_action() 
+print(last_action)
+
+
+What is correct after executing the code snippet above?
+(Select all acceptable answers.)
+
+1. Calling text_actions.undo_action() two more times just after the snippet will throw an Exception.
+2. text_actions has two items in the stack after running the snippet.
+3. The print statement will print "Write text".
+4. Calling text_actions.undo_action() just after the snippet will return "Add an empty page".
+5. Calling text_actions.undo_action() three more times just after the snippet will throw an Exception.
+6. There will be 4 items in text_actions.stack if text_actions.perform_action("Write more text") is called just after the snippet.
+
+########################
+Answers : 2, 4, 5
+########################
+
+#############################################################################################################################
+
+MCQ - 8
+
+A group of passionate developers thought of making a music player that adjusts the way it randomizes the next track depending on whether the listener chooses to like a track. 
+If the listener chooses to like a track, then the chance of it playing as the next track or again in the future should increase. 
+Otherwise, no changes need to be made. Their initial algorithm can be seen below:
+
+import random
+
+def random_playlist(tracks, first_track_index, chance_delta = 5):
+    chances = [10] * len(tracks)
+    current_track = tracks[first_track_index]
+    def get_next_track(liked_track):
+        nonlocal current_track
+        if liked_track:
+            chances[tracks.index(current_track)] += chance_delta	
+        current_track = random.choices(tracks, chances, k = 1)[0]
+        return current_track
+    return get_next_track
+
+The music player can be initialized like:
+
+hype_playlist = random_playlist(['Thanks for the Memories', 'All I Do Is Win', 'We Own It'], 0, 10)
+romance_playlist = random_playlist(['Crush', 'Payphone', 'Love Story'], 0)
+What is correct about the function random_playlist and the two created playlists?
+
+
+(Select all acceptable answers.)
+
+1. Calling print(hype_playlist.chances) will display the current weighted probabilities for each track in the hype_playlist.
+2. The value of chance_delta in the romance_playlist will be 10.
+3. In the function random_playlist, the chance_delta argument can be overridden/specified.
+4. Calling romance_playlist(False) will not modify the chances list that hype_playlist uses.
+
+########################
+Answers : 3, 4
+########################
+
+#############################################################################################################################
+
+
+
